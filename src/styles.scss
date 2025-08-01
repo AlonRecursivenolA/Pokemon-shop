@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  background: linear-gradient(135deg, #1f2c3d 0%, #40576c 100%);
+
+}
+
+// @media (prefers-reduced-motion: no-preference) {
+//   html {
+//     interpolate-size: allow-keywords;
+//   }
+// }
+
+// body {
+//   line-height: 1.5;
+//   -webkit-font-smoothing: antialiased;
+// }
+
+// img, picture, video, canvas, svg {
+//   display: block;
+//   max-width: 100%;
+// }
+
+// input, button, textarea, select {
+//   font: inherit;
+// }
+
+// p, h1, h2, h3, h4, h5, h6 {
+//   overflow-wrap: break-word;
+// }
+
+// p {
+//   text-wrap: pretty;
+// }
+// h1, h2, h3, h4, h5, h6 {
+//   text-wrap: balance;
+// }
+
+
+@mixin flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-direction-col{
+  flex-direction: column;
+}
+
+@mixin occupy-page{
+  // width: 100vw;
+  // height: 100vh;
+}
+

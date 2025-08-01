@@ -1,0 +1,12 @@
+<div class="root">
+    <div class="shop-container">
+      <div *ngFor="let pokemonchik of pokemonList; let i = index">
+        <div class="card">
+          <p>{{pokemonchik.name}}</p>
+          <img src="{{pokemonchik.imgUrl}}" alt="תמונת גיבור">
+          <p>{{pokemonchik.power}}</p>
+          <p>Strength: {{pokemonchik.strength}}</p>
+          <button (click)="handleTraining(pokemonchik)">Train!</button>
+    </div>
+    </div>
+</div>

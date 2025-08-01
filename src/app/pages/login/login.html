@@ -1,0 +1,27 @@
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="handleLogin(loginForm.value)">
+    
+    <label for="name">User Name</label>
+    <input
+      type="text"            
+      formControlName="name"
+      required
+    />
+    <div class="warnings" *ngIf="loginForm.get('name')?.touched && loginForm.get('name')?.invalid && loginForm.get('name')?.errors?.['length']">Please insert a username with at least 6 chars</div>
+    <label>Password</label>
+    <input
+      type="password"
+      formControlName="password"
+      required
+    />
+      <!-- <div class="warnings" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">Please choose a Password with 8 chars a capital letter a digit and a  non-alphanumeric char </div> -->
+      <div class="warnings" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['capital']">Please insert a capital letter</div>
+      <div class="warnings" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['length']">Please insert a 8 password length</div>
+      <div class="warnings" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['letter']">Please insert a letter</div>
+
+    <button type="submit" [disabled]="loginForm.invalid" [ngClass]="{'gray': loginForm.invalid, 'blue': !loginForm.invalid}">Login</button>
+    <a routerLink="/signup">No User? Signup</a>
+
+  </form>
+</div>
+ 

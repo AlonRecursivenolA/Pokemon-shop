@@ -1,0 +1,62 @@
+@import '../../../styles.scss';
+
+
+
+.container{
+  @include flex-center;
+  @include flex-direction-col;
+  @include occupy-page;
+  // background-image: url(../../../imgs/signup.jpg);
+  // background-position: center;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+}
+
+.container *{
+  @include flex-center;
+  @include flex-direction-col;
+}
+.container  > form > button {
+
+  color: white;
+  padding: 4px 10px;
+  border-radius: 10px;
+  margin: 16px;
+  width: 180px;
+}
+
+.container > form {
+  width: 400px;
+  height: 400px;
+  // background-color: aliceblue;
+  border: 3px red solid;
+  border-radius: 15px;
+}
+
+.container > form > label {
+  margin: 4px 2px;
+  @include flex-center;
+  display: block;
+  text-align: center;
+  color: white;
+  padding: 8px;
+}
+
+.container a {
+  color: rgb(210, 201, 209);
+}
+
+.gray{
+  background-color: gray;
+}
+.blue{
+  background-color: cornflowerblue;
+
+}
+
+
+.warnings{
+  margin-top: 8px;
+  color: red;
+  text-align: center;
+}
