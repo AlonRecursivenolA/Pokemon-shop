@@ -39,13 +39,34 @@ export class Home implements OnInit{
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    handleTraining(pokemon:any){
-        // console.log(this.pokemonList.filter((a: any)=> a.id===index))
-        const increasePowerRandomaly:number = this.getRandomInt(5,100);
-        pokemon.strength += increasePowerRandomaly;
-        const currentUser = localStorage.getItem(`whosLoggedIn`);
-        const currentObject = localStorage.getItem(`${currentUser}`);
-        
-
+  handleTraining(pokemon: any) {
+    const currentUser = localStorage.getItem(`whosLoggedIn`);
+    const userData = localStorage.getItem(`${currentUser}`);
+    const user = userData ? JSON.parse(userData) : null;
+    const dayInMilliSeconds = 60*60*24*1000;
+    let lastPokemonTimeTrained:number = Date.now();
+    const pokemonToUpdate = user.selectedItems.find((p: any) => p && p.id === pokemon.id);
+    if (pokemonToUpdate) {
+      const increasePowerRandomaly: number = this.getRandomInt(5, 20);
+      pokemonToUpdate.strength += increasePowerRandomaly;
+      if(pokemonToUpdate.lastPokemonTimeTrained !== null && pokemonToUpdate.lastTimeTrained + dayInMilliSeconds < Date.now()){
+        pokemonToUpdate.timesTrainedToday = 0;
       }
+      if(pokemonToUpdate.timesTrainedToday === 4){
+        alert('cannot train anymore today please wait 24hours');
+      }
+      pokemonToUpdate.lastTimeTrained = lastPokemonTimeTrained;
+      pokemonToUpdate.timesTrainedToday += 1;
+
+      const index = this.pokemonList.findIndex((pokemon:any) => pokemon && pokemon.id === pokemonToUpdate.id);
+      if (index !== -1) {
+        this.pokemonList[index].strength = pokemonToUpdate.strength;
+        this.pokemonList[index].lastTimeTrained = pokemonToUpdate.lastTimeTrained;
+        this.pokemonList[index].timesTrainedToday = pokemonToUpdate.timesTrainedToday;
+      }
+
+      this.pokemonList = [...this.pokemonList];
+      localStorage.setItem(`${currentUser}`, JSON.stringify(user));
+    }
+  }
 }

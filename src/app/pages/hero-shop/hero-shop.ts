@@ -11,6 +11,7 @@ import { filter } from 'rxjs';
 })
 export class HeroShop implements OnInit{
   pokemonList:any = [];
+  bought = false;
   constructor(private pokemon:PokemonService, private router: Router){
 
   }
@@ -25,7 +26,7 @@ export class HeroShop implements OnInit{
   // }
 
     handleSell(index: number) {
-      
+     
       const whosLoggedIn = localStorage.getItem('whosLoggedIn');
       const userData = localStorage.getItem(`${whosLoggedIn}`);
       if(userData){
@@ -34,6 +35,7 @@ export class HeroShop implements OnInit{
           currentPokemonList[index] = this.pokemonList[index];
           currentUser.pokemonList = currentPokemonList;
           localStorage.setItem(`${whosLoggedIn}`, JSON.stringify(currentUser));
+          this.bought =true;
       }
     }
     handleRedirect(){

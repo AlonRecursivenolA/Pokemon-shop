@@ -1,6 +1,9 @@
 <div class="container">
   <form [formGroup]="loginForm" (ngSubmit)="handleLogin(loginForm.value)">
-    
+    <div class="form-header">
+      <div>Login</div>
+    </div>
+    <div class="form-input-container">
     <label for="name">User Name</label>
     <input
       type="text"            
@@ -18,10 +21,11 @@
       <div class="warnings" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['capital']">Please insert a capital letter</div>
       <div class="warnings" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['length']">Please insert a 8 password length</div>
       <div class="warnings" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['letter']">Please insert a letter</div>
-
+            </div>
+      <div class="form-submit">
     <button type="submit" [disabled]="loginForm.invalid" [ngClass]="{'gray': loginForm.invalid, 'blue': !loginForm.invalid}">Login</button>
     <a routerLink="/signup">No User? Signup</a>
-
+    </div>
   </form>
 </div>
  

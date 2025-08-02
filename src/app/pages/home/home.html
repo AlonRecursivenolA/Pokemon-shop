@@ -6,7 +6,7 @@
           <img src="{{pokemonchik.imgUrl}}" alt="תמונת גיבור">
           <p>{{pokemonchik.power}}</p>
           <p>Strength: {{pokemonchik.strength}}</p>
-          <button (click)="handleTraining(pokemonchik)">Train!</button>
+          <button class="btn"[ngClass]="{'not-available':pokemonchik.timesTrainedToday>=5}" [disabled]="pokemonchik.timesTrainedToday===5" (click)="handleTraining(pokemonchik)">Train!</button>
     </div>
     </div>
 </div>

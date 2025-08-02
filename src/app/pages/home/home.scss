@@ -37,7 +37,6 @@
   margin: 8px;
 }
 .shop-container button{
-    background-color: #00bcd4; 
     color: white;
     border: none;
     border-radius: 8px;
@@ -46,8 +45,8 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin: 4px;
-}
-    .shop-container button:hover {
+  }
+      .shop-container button:hover {
     background-color: #010404;
   }
       .root{
@@ -72,4 +71,21 @@
   opacity: 0.5;
   // background-color: cadetblue;
   background-color: #61a0f3;
+}
+
+.not-available{
+  color: gray !important;
+  background-color: gray !important;
+}
+
+.btn{
+    background-color: #00bcd4; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 4px;
 }
