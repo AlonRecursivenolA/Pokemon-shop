@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../core/services/pokemon-service';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { Pokemon } from '../../models/pokemon';
 
 @Component({
   selector: 'app-hero-shop',
@@ -10,34 +11,43 @@ import { filter } from 'rxjs';
   styleUrl: './hero-shop.scss',
 })
 export class HeroShop implements OnInit{
-  pokemonList:any = [];
+  buttonClicked : boolean[]= [];
+  pokemons$: any;
   bought = false;
-  constructor(private pokemon:PokemonService, private router: Router){
+  myPokemons:any = []
+  constructor(private pokemonService:PokemonService, private router: Router, ){
 
   }
 
-  ngOnInit(): void {
-      this.pokemonList = this.pokemon.getPokemons();
-  }
+      ngOnInit(): void {
+        
+        this.pokemons$ = this.pokemonService.list$;
+        const pokemons = this.pokemons$.source.value;
+        pokemons[0] = { ...pokemons[0], imgUrl: "../../../assets/imgs/001.png" };
+        pokemons[1] = { ...pokemons[0], imgUrl: "../../../assets/imgs/002.png" };
+        pokemons[2] = { ...pokemons[0], imgUrl: "../../../assets/imgs/003.png" };
 
-  // signOut(){
-  //   localStorage.removeItem('whosLoggedIn');
-  //   this.router.navigate(['/login'])
-  // }
-
-    handleSell(index: number) {
-     
-      const whosLoggedIn = localStorage.getItem('whosLoggedIn');
-      const userData = localStorage.getItem(`${whosLoggedIn}`);
-      if(userData){
-          const currentUser = JSON.parse(userData);
-          let currentPokemonList = currentUser.selectedItems;
-          currentPokemonList[index] = this.pokemonList[index];
-          currentUser.pokemonList = currentPokemonList;
-          localStorage.setItem(`${whosLoggedIn}`, JSON.stringify(currentUser));
-          this.bought =true;
+        this.pokemonService.load();
       }
-    }
+
+      handleSell(index:number){
+        this.pokemonService.claimPokemon(index).subscribe({
+          next: pok => {
+            this.myPokemons = [...this.myPokemons, pok],
+          alert('Pokemon Purchased!')},
+          error : err => {
+            if(err.status == 409){
+              alert("Pokemon already purchased")
+            }
+            else{
+              console.error(err)
+            }
+          }
+        })
+        this.pokemons$[index] = null;
+
+      }
+    
     handleRedirect(){
       this.router.navigate(['/home'])
     }

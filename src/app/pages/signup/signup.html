@@ -23,7 +23,7 @@
       <div class="warnings" *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors?.['letter']">Please insert a letter</div>
             </div>
       <div class="form-submit">
-    <button type="submit" [disabled]="signUpForm.invalid" [ngClass]="{'gray': signUpForm.invalid, 'blue': !signUpForm.invalid}">Login</button>
+    <button type="submit" [disabled]="signUpForm.invalid" [ngClass]="{'gray': signUpForm.invalid, 'blue': !signUpForm.invalid}">Signup</button>
     <a routerLink="/login">Have a user? Login</a>
     </div>
   </form>

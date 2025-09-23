@@ -1,12 +1,52 @@
 import { Injectable } from '@angular/core';
 import { Pokemon } from '../../models/pokemon';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonService {
-  
+
+  constructor(private http: HttpClient) {
+
+  }
+  private apiUrl = "https://localhost:44385/api/PokemonShop";
+
+  private _list = new BehaviorSubject<Pokemon[]>([]);
+  readonly list$ = this._list.asObservable();
+
+  load(): void {
+    this.http.get<Pokemon[]>(this.apiUrl).subscribe({
+      next: data => this._list.next(data), 
+      error: err => {
+        console.error(err);
+        this._list.next([]);
+      }
+    });
+  }
+
+  claimPokemon(id: number) {
+    return this.http.post<{id:number; name:string; power:number, lastTimeTrained:any, timesTrainedToday:number}>(
+      `${this.apiUrl}/claim/${id}`, {}
+    )
+  }
+
+    private _usersPokemons = new BehaviorSubject<Pokemon[]>([]);
+  readonly usersPokemons$ = this._usersPokemons.asObservable();
+
+  getUsersPokemons(){
+    return this.http.get<Pokemon[]>(`${this.apiUrl}/myPokemons`).subscribe({
+      next : data => this._usersPokemons.next(data),
+      error : (err) => console.error(err)
+    })
+  }
+
+  trainPokemon(id:number){
+    return this.http.patch(`${this.apiUrl}/${id}/addStrength`, id);
+  }
+
 pokemons: Pokemon[] = [
   { id: 1, name: 'Ivysaur', imgUrl: '/assets/imgs/001.png', power: 'Overgrow', strength: 6, timesTrainedToday: 0, lastTimeTrained: null },
   { id: 2, name: 'Charizard', imgUrl: '/assets/imgs/002.png', power: 'Blaze', strength: 9, timesTrainedToday: 0, lastTimeTrained: null },
@@ -34,13 +74,8 @@ selectedPokemons = this._selectedPokemons.asObservable();
   // return new BehaviorSubject(this.pokemons).asObservable();
 // }
 
-  getPokemons():Pokemon[]{
+  public getPokemons():Pokemon[]{
     return this.pokemons;
-  }
-
-  addPokemon(p: Pokemon) {
-    const current = this._selectedPokemons.getValue();
-    this._selectedPokemons.next([...current, p]);
   }
 
 }

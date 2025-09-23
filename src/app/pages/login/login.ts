@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from '../../core/services/auth';
+import { AuthService } from '../../core/services/auth';
 import { User } from '../../models/user';
 import { AbstractControl, FormControl, FormGroup, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,13 +12,17 @@ import { Validator } from '@angular/forms';
   styleUrl: './login.scss'
 
 })
-export class Login {
+export class Login implements OnInit{
   loginForm = new FormGroup({
     name : new FormControl('', [Validators.required, this.userValidator]),
     password : new FormControl('', [Validators.required, this.passwordValidator]),
   })
-  constructor(private authService: Auth, private router: Router){
+  constructor(private authService: AuthService, private router: Router){
     
+  }
+
+  ngOnInit(): void {
+      this.authService.logout();
   }
   passwordValidator(control:AbstractControl): ValidationErrors | null{
     if(control.value.length < 8){
@@ -42,18 +46,28 @@ export class Login {
   }
 
   handleLogin(form:any){
-    const nameOfUser=form.name;
-    const storagedData = localStorage.getItem(`${nameOfUser}`);
-    const storagedUserName = storagedData ? JSON.parse(storagedData).userName : null;
-    const storagedPassword = storagedData ? JSON.parse(storagedData).password : null;
+
+
+    this.authService.login(form.name, form.password).subscribe({
+      next: () => this.router.navigate(['/shop']),
+      error: (err) => {
+        console.error('LOGIN ERROR', err);
+        alert(`Login failed: ${err.status}`);
+    }
+    });
+
+    // const nameOfUser=form.name;
+    // const storagedData = localStorage.getItem(`${nameOfUser}`);
+    // const storagedUserName = storagedData ? JSON.parse(storagedData).userName : null;
+    // const storagedPassword = storagedData ? JSON.parse(storagedData).password : null;
     
-    if(storagedUserName === form.name && storagedPassword === form.password){
-      localStorage.setItem('whosLoggedIn', storagedUserName)
-      this.router.navigate(['/shop']);
-    }
-    else{
-       alert('user does not exist!');
-    }
+    // if(storagedUserName === form.name && storagedPassword === form.password){
+    //   localStorage.setItem('whosLoggedIn', storagedUserName)
+    //   this.router.navigate(['/shop']);
+    // }
+    // else{
+    //    alert('user does not exist!');
+    // }
   }
 }
 

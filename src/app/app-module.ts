@@ -5,13 +5,11 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { RouterModule } from '@angular/router';
 import { PagesModule } from './pages/pages-module';
-
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './interceptors/auth-interceptor';
 
 @NgModule({
-  declarations: [
-    App,
-
-  ],
+  declarations: [App],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,8 +19,10 @@ import { PagesModule } from './pages/pages-module';
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    provideHttpClient(withInterceptors([authInterceptor])),
+    
   ],
   bootstrap: [App]
 })
-export class AppModule { }
+export class AppModule {}

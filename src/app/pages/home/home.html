@@ -1,12 +1,12 @@
 <div class="root">
     <div class="shop-container">
-      <div *ngFor="let pokemonchik of pokemonList; let i = index">
+      <div *ngFor="let pokemonchik of pokemonList$ | async; let i = index">
         <div class="card">
           <p>{{pokemonchik.name}}</p>
-          <img src="{{pokemonchik.imgUrl}}" alt="תמונת גיבור">
+          <img src="../../../assets/imgs/001.png" alt="תמונת גיבור" />
           <p>{{pokemonchik.power}}</p>
           <p>Strength: {{pokemonchik.strength}}</p>
-          <button class="btn"[ngClass]="{'not-available':pokemonchik.timesTrainedToday>=5}" [disabled]="pokemonchik.timesTrainedToday===5" (click)="handleTraining(pokemonchik)">Train!</button>
+          <button class="btn"[ngClass]="{'not-available':pokemonchik.timesTrainedToday>=5}" [disabled]="pokemonchik.timesTrainedToday===5" (click)="handleTraining(i+1)">Train!</button>
     </div>
     </div>
 </div>

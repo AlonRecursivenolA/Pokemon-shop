@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { PokemonService } from './core/services/pokemon-service';
+import { AuthService } from './core/services/auth';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class App{
   currentRoute: string = '';
 
 
-  constructor(private router:Router){
+  constructor(private router:Router, private authService: AuthService){
       this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: any) => {
@@ -23,13 +24,13 @@ export class App{
 
   isLoggedIn(){
 
-    if (typeof window !== 'undefined' && localStorage.getItem('whosLoggedIn') !== null) {
+    if (typeof window !== 'undefined' && localStorage.getItem('jwt') !== null) {
       return true;
     }
     return false;
   }
   logout() {
-      localStorage.removeItem('whosLoggedIn');
+      this.authService.logout();
       this.router.navigate(['/login'])
   }
   navigate() {
@@ -41,11 +42,11 @@ export class App{
   }
 
   getToggleButtonLabel(): string {
-    return this.currentRoute === '/home' ? 'Shop' : 'Home';
+    return this.currentRoute === '/home' ? 'Shop' : 'Dash Board';
   }
   getPageName():string {
     if(this.isLoggedIn()){
-    return this.currentRoute === '/home' ? 'Home' : 'Shop'
+    return this.currentRoute === '/home' ? 'Dash Board' : 'Shop'
     }
     return this.currentRoute === '/login' ? 'Login' : 'Signup'
   }
