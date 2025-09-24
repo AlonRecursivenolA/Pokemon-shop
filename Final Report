@@ -1,0 +1,62 @@
+Final Report
+
+We have created a Pokémon Shop, where users can buy and train their own Pokémon.
+The system includes:
+
+A store catalog
+
+Validation for inputs
+
+An admin interface
+
+A home page where you can train and increase your Pokémon’s strength
+
+The front-end was built with Angular, and the back-end with C# and SQL.
+
+Project participants:
+
+Alon Eretz
+
+Aharon Noiman
+
+Most of the features and pages were developed together, while learning new skills and sharpening existing ones.
+
+Project Story
+Why we chose this topic
+
+We wanted to build something fun and interactive that would also allow us to practice real-world skills: authentication, database management, front-end design, and communication between front and back ends. Pokémon felt like the perfect theme because it’s both familiar and flexible for testing features like training, purchasing, and catalog management.
+
+Technology choices
+
+We used Angular because it’s modern, widely used, and gave us practice with reactive programming and state management.
+For the back end, we chose C# and SQL since they are powerful, stable, and good for learning enterprise-level development. We considered alternatives like Node.js or MongoDB but decided to stick with more structured tools to deepen our understanding.
+
+Design and implementation
+
+We started by sketching the structure of the shop: catalog → user → Pokémon → training. From there we defined which routes, services, and APIs were needed. We divided tasks and tested features step by step, using both manual testing and debugging tools.
+
+Learning outcomes
+
+We learned how to connect a front-end Angular app to a C# backend, design and consume REST APIs, and manage relational data with SQL. We also gained teamwork experience by splitting work, merging ideas, and solving bugs together.
+
+If we were to start again, we would design the database with more foresight, and plan the API endpoints more carefully to avoid re-writes during development.
+
+Use of ChatGPT
+
+We occasionally used ChatGPT for help with code snippets, debugging ideas, and explanations of Angular and C# concepts. It was useful for clarifying errors quickly, though we still had to adapt answers to fit our specific project.
+
+Possible extensions
+
+If we had more time, we would add:
+
+User authentication with roles (user vs admin)
+
+Pokémon battles between users
+
+Improved UI/UX styling
+
+A trading system between players
+
+Security considerations
+
+We discussed issues such as SQL injection, authentication, and safe handling of user data. Right now, the project is functional for testing but not fully ready to be a public website because it lacks proper user authentication and advanced security measures.
