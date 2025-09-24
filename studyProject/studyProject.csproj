@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\imgs\001.png" />
+    <None Include="wwwroot\assets\imgs\002.png" />
+    <None Include="wwwroot\assets\imgs\003.png" />
+    <None Include="wwwroot\assets\imgs\004.png" />
+    <None Include="wwwroot\assets\imgs\005.png" />
+    <None Include="wwwroot\assets\imgs\006.png" />
+    <None Include="wwwroot\assets\imgs\007.png" />
+    <None Include="wwwroot\assets\imgs\008.png" />
+    <None Include="wwwroot\assets\imgs\009.png" />
+    <None Include="wwwroot\assets\imgs\010.png" />
+    <None Include="wwwroot\assets\imgs\011.png" />
+    <None Include="wwwroot\assets\imgs\012.png" />
+    <None Include="wwwroot\assets\imgs\013.png" />
+    <None Include="wwwroot\assets\imgs\014.png" />
+  </ItemGroup>
+
+</Project>
