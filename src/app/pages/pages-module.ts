@@ -6,6 +6,7 @@ import { Home } from './home/home';
 import { HeroShop } from './hero-shop/hero-shop';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Admin } from './admin/admin';
 
 
 
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     Login,
     Signup,
     HeroShop,
-    Home
+    Home,
+    Admin
   ],
   imports: [
     CommonModule, RouterModule, FormsModule, ReactiveFormsModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../../core/services/pokemon-service';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, timeout } from 'rxjs';
 import { Pokemon } from '../../models/pokemon';
 
 @Component({
@@ -23,11 +23,7 @@ export class HeroShop implements OnInit{
         
         this.pokemons$ = this.pokemonService.list$;
         const pokemons = this.pokemons$.source.value;
-        pokemons[0] = { ...pokemons[0], imgUrl: "../../../assets/imgs/001.png" };
-        pokemons[1] = { ...pokemons[0], imgUrl: "../../../assets/imgs/002.png" };
-        pokemons[2] = { ...pokemons[0], imgUrl: "../../../assets/imgs/003.png" };
-
-        this.pokemonService.load();
+         this.pokemonService.load();
       }
 
       handleSell(index:number){

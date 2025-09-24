@@ -29,6 +29,7 @@ export class Home implements OnInit{
     }
 
   handleTraining(index: any) {
+    alert("Pokemon Trained!");
     this.pokemonService.trainPokemon(index).subscribe(
       
       (err) => console.error(err)

@@ -6,6 +6,7 @@ import { Login } from './pages/login/login';
 import { Signup } from './pages/signup/signup';
 import { AuthService } from './core/services/auth';
 import { authGuard } from './core/guards/auth-guard';
+import { Admin } from './pages/admin/admin';
 
 const routes: Routes = [
   
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path : 'login', component : Login /*, canActivate : [authGuard] */},
   {path : 'signup', component : Signup /*, canActivate : [authGuard] */},
   {path : 'home', component : Home},
+  {path : 'admin', component : Admin},
   {path : '', component : Login /*,  canActivate : [authGuard] */},
   {path : '**', component : Home}
 

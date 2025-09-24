@@ -17,15 +17,28 @@ export class PokemonService {
   private _list = new BehaviorSubject<Pokemon[]>([]);
   readonly list$ = this._list.asObservable();
 
-  load(): void {
-    this.http.get<Pokemon[]>(this.apiUrl).subscribe({
-      next: data => this._list.next(data), 
-      error: err => {
-        console.error(err);
-        this._list.next([]);
+load(): void {
+  this.http.get<Pokemon[]>(this.apiUrl).subscribe({
+    next: data => {
+      if (data.length > 0) {
+        data[0] = { ...data[0], imgUrl: "assets/imgs/001.png" };
       }
-    });
-  }
+      if (data.length > 1) {
+        data[1] = { ...data[1], imgUrl: "assets/imgs/002.png" };
+      }
+      if (data.length > 2) {
+        data[2] = { ...data[2], imgUrl: "assets/imgs/003.png" };
+      }
+
+      this._list.next(data);
+    },
+    error: err => {
+      console.error(err);
+      this._list.next([]);
+    }
+  });
+}
+
 
   claimPokemon(id: number) {
     return this.http.post<{id:number; name:string; power:number, lastTimeTrained:any, timesTrainedToday:number}>(
@@ -43,8 +56,15 @@ export class PokemonService {
     })
   }
 
+
+
   trainPokemon(id:number){
     return this.http.patch(`${this.apiUrl}/${id}/addStrength`, id);
+  }
+
+
+  getRegisteredUsers(){
+      return this.http.get(`${this.apiUrl}/admin`);
   }
 
 pokemons: Pokemon[] = [
